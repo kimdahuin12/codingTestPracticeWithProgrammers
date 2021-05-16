@@ -1,0 +1,15 @@
+class Solution {
+    public String solution(int a, int b) {
+        int allDay = 0;
+        int mon[] = {0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30};
+        String day[] = {"THU", "FRI", "SAT", "SUN", "MON", "TUE", "WED"};
+
+        for(int i = 0; i < a; i++){
+            allDay += mon[i];
+        }
+        allDay += b;
+        String answer = day[allDay%7];
+
+        return answer;
+    }
+}
