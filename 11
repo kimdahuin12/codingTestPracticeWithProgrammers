@@ -1,0 +1,32 @@
+class Solution {
+    public String solution(String new_id) {
+        String temp = new_id.toLowerCase();
+
+        //영어소문자, 숫자, -, ., _를 제외한 모든 문자들 제거
+        temp = temp = temp.replaceAll("[^a-z0-9-._]","");     
+
+        //.이 2번 이상 들어간 문자들 제거
+        temp = temp.replaceAll("[.]{2,}",".");                 
+
+        // 시작이나 끝이 .이면 제거
+        temp = temp.replaceAll("^[.]|[.]$", "");             
+
+        //빈 문자열이면 a 넣기
+        if(temp.length()==0) temp = "a";                     
+
+        //길이가 16 이상이면 15번째 문자열까지 자르고 그 상태에서 문자열 끝이 .이라면 제거
+        if(temp.length()>=16) {                                
+            temp = temp.substring(0, 15);
+            temp = temp.replaceAll("[.]$", "");
+        }
+
+        //길이가 2 이하이면 문자열 끝에 있는 문자를 길이가 3이 될 때까지 문자열 끝에 넣기.
+        if(temp.length()<=2){                                
+            String tempS = Character.toString(temp.charAt(temp.length()-1));
+            while(temp.length()<=2){ temp+=tempS; }
+       }
+
+        String answer = temp;
+        return answer;
+    }
+}
