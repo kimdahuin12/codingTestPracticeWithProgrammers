@@ -1,0 +1,18 @@
+class Solution {
+    public int solution(int n) {
+        String th = "";
+        int cnt;
+        int num=0;
+        while(n>0){
+            th += n%3;
+            n/=3;
+        }
+        cnt = th.length()-1;
+        for(int i = 0; i < th.length(); i++){
+            num += ((Math.pow(3, cnt))*((int)(th.charAt(i))-'0'));
+            cnt--;
+        }
+
+        return num;
+    }
+}
