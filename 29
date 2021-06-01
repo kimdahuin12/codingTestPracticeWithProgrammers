@@ -1,0 +1,38 @@
+class Solution {
+    public int[] solution(int[] numbers) {
+        boolean answerB[] = new boolean[200];
+        
+        for(int i = 0; i < numbers.length; i++){
+            for(int j = 0; j < numbers.length; j++){
+               if(i!=j)
+                    answerB[numbers[i]+numbers[j]] = true;
+            }
+        }
+        int cnt = 0;
+        for(int i = 0; i < answerB.length; i++)
+        {
+            if(answerB[i])
+                cnt++;
+        }
+        int[] answer = new int[cnt];
+        int answerCnt = 0;
+        for(int i = 0; i < answerB.length; i++)
+        {
+            if(answerB[i]){
+                answer[answerCnt] = i;
+                answerCnt++;
+            }
+        }
+        
+        for(int i = 0; i < answer.length-1; i++){
+            for(int j = i+1; j < answer.length; j++){
+                if(answer[i]>answer[j]){
+                    int temp = answer[i];
+                    answer[i] = answer[j];
+                    answer[j] = temp;
+                }
+            }
+        }
+        return answer;
+    }
+}
