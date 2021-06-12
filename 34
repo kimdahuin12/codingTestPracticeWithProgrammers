@@ -1,0 +1,36 @@
+class Solution {
+    public String solution(String s) {
+        char[] answer = s.toCharArray();
+        int lowerCnt = 0;
+        for(int i = 0; i < answer.length; i++){
+            if(Character.isLowerCase(answer[i])){
+                char temp = answer[lowerCnt];
+                answer[lowerCnt] = answer[i];
+                answer[i] = temp;
+                lowerCnt++;
+            }
+        }
+        
+        for(int i = 0; i < lowerCnt-1; i++){
+            for(int j = i+1; j < lowerCnt; j++){
+                if(answer[i] < answer[j]){
+                    char temp = answer[j];
+                    answer[j] = answer[i];
+                    answer[i] = temp;
+                } 
+            }
+        }
+        
+        for(int i = lowerCnt; i < answer.length-1; i++){
+            for(int j = i+1; j < answer.length; j++){
+                if(answer[i] < answer[j]){
+                    char temp = answer[j];
+                    answer[j] = answer[i];
+                    answer[i] = temp;
+                } 
+            }
+        }
+        
+        return String.valueOf(answer);
+    }
+}
