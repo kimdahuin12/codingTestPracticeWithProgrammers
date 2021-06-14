@@ -1,0 +1,50 @@
+class Solution {
+    public int[] solution(int[] lottos, int[] win_nums) {
+        int[] arrays = new int[46]; //나올 수 있는 수들
+        int maxCnt = 0, minCnt = 0;
+        int invisibleCnt = 0;
+        
+        //일단 arrays배열을 -1로 초기화
+        for(int i = 0; i < arrays.length; i++)
+            arrays[i] = -1;
+        
+        //로또 당첨 번호를 1로 바꿔줌
+        for(int i = 0; i < win_nums.length; i++)
+            arrays[win_nums[i]] = 1;
+        
+        //민우가 고른 로또 번호이면서 당첨 번호인 것은 최솟값의 갯수
+        for(int i = 0; i < lottos.length; i++)
+            if(arrays[lottos[i]]==1) minCnt++;
+        
+        //민우가 고른 안보이는 로또 번호의 수를 check
+        for(int i = 0; i < lottos.length; i++)
+            if(lottos[i]==0) invisibleCnt++;
+        
+        //최대순위번호갯수는 안보이는 번호의 갯수 + 최소순위번호갯수
+        maxCnt = invisibleCnt+minCnt;
+
+        //최고 순위와 최저 순위를 계산
+        int rankMax = 0, rankMin = 0;
+        if(minCnt<=1) rankMin = 6;
+        else rankMin = 7-minCnt;     
+        if(maxCnt<=1) rankMax = 6;
+        else rankMax = 7-maxCnt;
+        
+        return new int[]{rankMax, rankMin}; 
+    }
+}
+        //수도코드? (최초버젼이고 위의 코드는 수정을 함.)
+        
+        //당첨 번호는 1, 당첨번호이면서 민우가 선택한 번호이면 2
+        //안보이는 번호는 0 나머지는 -1.를 넣는 길이가 46인 배열 arrays를 만든다.
+        //위의 것을...(아래)
+        //win_nums의 인덱스를 모두 돌면서(i) arrays[win_nums[i]] = 1;을 한다
+
+        //lottos 인덱스를 모두 돌면서(i) 
+        //if(arrays[lottos[i]]==1) arrays[lottos[i]] = 2;
+        
+        //lottos 인덱스를 모두 돌면서(i)
+        //if(lottos[i]==0) invisible++;
+        
+        //arrays를 돌면서 값이 2이면 minCnt++;를 한다.(최저순위)
+        //minCnt+invisible는 maxCnt. 최댓값이다.
