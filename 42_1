@@ -1,0 +1,44 @@
+class Solution {
+    public int[] solution(int[] answers) {
+        int one[] = {1, 2, 3, 4, 5};
+        int two[] = {2, 1, 2, 3, 2, 4, 2, 5};
+        int three[] = {3, 3, 1, 1, 2, 2, 4, 4, 5, 5};
+        int answerT[] = {10, 10, 10};
+        int onecnt=0, twocnt=0, threecnt=0;
+        for(int i = 0; i < answers.length; i++){
+            if(answers[i]==one[i%5]){
+                onecnt++;
+            }
+            if(answers[i]==two[i%8]){
+                twocnt++;
+            }
+            if(answers[i]==three[i%10]){
+                threecnt++;
+            }
+        }
+        
+        int max = onecnt;
+        if(max<twocnt) max = twocnt;
+        if(max<threecnt) max = threecnt;
+        //가장 많이 맞춘 사람은 max번
+        
+        if(max==onecnt) answerT[0] = 1;
+        if(max==twocnt) answerT[1] = 2;
+        if(max==threecnt) answerT[2] = 3;
+        
+        int answerL = 3;
+        
+        for(int i = 0; i < 3; i++)
+            if(answerT[i]==10)
+                answerL--;
+        
+        int answer[] = new int[answerL];
+        
+        int answerIdx = 0;
+        for(int i = 0; i < answerT.length; i++){
+            if(answerT[i]!=10) { answer[answerIdx] = answerT[i]; answerIdx++; }
+        }
+        
+        return answer;
+    }
+}
