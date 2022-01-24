@@ -1,0 +1,38 @@
+class Solution {
+    public int[] solution(String[] id_list, String[] report, int k) {
+        int[] answer = new int[id_list.length];
+        int[][] id_report = new int[id_list.length][id_list.length];//유저가 신고한 id와 횟수를 저장
+        int userIdx = -1; //신고한 사람의 id
+        
+        for(int j = 0; j < report.length; j++){
+            String repArr[] = report[j].split(" ");
+            for(int i = 0; i < id_list.length; i++){
+                if(id_list[i].equals(repArr[0])){ //신고한 사람 id
+                    userIdx = i;
+                }
+            }
+            for(int i = 0; i < id_list.length; i++){
+                if(id_list[i].equals(repArr[1]) && id_report[userIdx][i]==0){ //신고당한 사람 id
+                    id_report[userIdx][i]++;
+                }
+            }
+        }
+        
+        int sum;
+        for(int i = 0; i < id_list.length; i++){
+            sum = 0;
+            for(int j = 0; j < id_list.length; j++){
+                sum+=id_report[j][i];
+            }
+            if(sum >= k){
+                for(int j = 0; j < id_list.length; j++){
+                    if(id_report[j][i]==1){
+                        answer[j]++;
+                    }
+                }
+            }
+        }
+        
+        return answer;
+    }
+}
